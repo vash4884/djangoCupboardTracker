@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>My Table</title>
+        <style>
+            table {
+                width: 75%;
+                border-collapse: separate;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+                border: 1px solid #ddd;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+<head>
+<title>Food Tracker Home</title>
+</head>
+<body>
+<h1>Vash's food Tracker</h1>
+<div>
+ <p> This is a simple program to keep track of what's in the pantry for ease of grocery Shopping.
+ <br /> sure there are other programs out there but hey this gets me back in the swing of Django</p>
+</div>
+<table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Food Type</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.food_type }}</td>
+                <td>{{ item.amount_on_hand }}</td>
+                <td>
+                    <form method="post" action="{% url 'foodTracker:deleteFood' item.id %}">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<div>
+<a href="index">Home</a><br />
+</div>
+</body>
+</html>
